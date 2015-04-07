@@ -52,6 +52,7 @@ class RepoVersion(Model):
     version_name = Column(String(45))
     version_location = Column(String(100))
     head_line = Column(Text())
+    collector_id = Column(Text())
 
 
 class RecordBase(object):
