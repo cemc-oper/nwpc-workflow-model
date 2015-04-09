@@ -166,6 +166,11 @@ class Record(RecordBase, Model):
             record_string=self.record_string.strip()
         )
 
+    @staticmethod
+    def prepare(owner, repo):
+        table_name = 'record_{repo_name}'.format(repo_name=repo)
+        Record.__table__.name = table_name
+
     def columns(self):
         return [c.name for c in self.__table__.columns]
 
