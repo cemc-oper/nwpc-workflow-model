@@ -54,6 +54,12 @@ class RepoVersion(Model):
     head_line = Column(Text())
     collector_id = Column(Text())
 
+    def columns(self):
+        return [c.name for c in self.__table__.columns]
+
+    def to_dict(self):
+        return dict([(c, getattr(self, c)) for c in self.columns()])
+
 
 class RecordBase(object):
     """
