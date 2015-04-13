@@ -32,6 +32,7 @@ class Repo(Model):
     repo_name = Column(String(45))
     repo_location = Column(String(100))
     current_version_id = Column(Integer())
+    repo_description = Column(Text())
 
     def __init__(self):
         pass
