@@ -1,5 +1,6 @@
 # coding=utf-8
 from datetime import datetime
+import time
 
 from sqlalchemy import Column, Integer, String, Text, Date, Time
 from sqlalchemy.ext.declarative import declarative_base
@@ -42,6 +43,15 @@ class Repo(Model):
 
     def to_dict(self):
         return dict([(c, getattr(self, c)) for c in self.columns()])
+
+    def update_from_dict(self, repo_dict):
+        if self.repo_id != repo_dict['repo_id']:
+            return False
+        # 只更新一部分内容，后面需要更改
+        self.repo_location = repo_dict['repo_location']
+        self.current_version_id = repo_dict['current_version_id']
+        self.repo_description = repo_dict['repo_description']
+        return True
 
 
 class RepoVersion(Model):
