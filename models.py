@@ -71,6 +71,18 @@ class RepoVersion(Model):
     def to_dict(self):
         return dict([(c, getattr(self, c)) for c in self.columns()])
 
+    @staticmethod
+    def create_from_dict(repo_version_dict):
+        new_version = RepoVersion()
+        new_version.repo_version_id = None
+        new_version.repo_id = repo_version_dict['repo_id']
+        new_version.version_id = repo_version_dict['version_id']
+        new_version.version_name = repo_version_dict['version_name']
+        new_version.version_location = repo_version_dict['version_location']
+        new_version.head_line = repo_version_dict['head_line']
+        new_version.collector_id = None
+        return new_version
+
 
 class RecordBase(object):
     """
