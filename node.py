@@ -106,6 +106,7 @@ class Node(object):
 
     @staticmethod
     def node_is_valid_from_session(node_path, session):
+        # TODO (windroc, 2015.05.15): 何时按照 owner/repo 准备 Record 对象。
         query = session.query(Record).filter(Record.record_fullname == node_path).limit(1).all()
         if len(query) == 0:
             return False
@@ -114,7 +115,7 @@ class Node(object):
 
     @staticmethod
     def sub_node_is_valid_from_session(node_path, session):
-        # TODO (windroc, 2015.02.26): this tasks long time.
+        # NOTE: 花费太长时间，最好由 Spark 任务得到节点树后查找是否有子节点。
         path = node_path+'/'
         query = session.query(Record.record_fullname) \
             .filter("LEFT(record_fullname, {path_length}) = '{path}'".format(path_length=len(path), path=path))\
@@ -130,6 +131,7 @@ class Node(object):
 
     @staticmethod
     def get_node_type_from_session(node_path, session):
+        # NOTE：花费时间太长，最好由 Spark 任务得到节点树后再确定节点类型。
         node_type = NodeType.get_node_type_string(NodeType.Unknown)
         if node_path == '/':
             return NodeType.get_node_type_string(NodeType.Root)

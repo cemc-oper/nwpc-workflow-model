@@ -197,6 +197,12 @@ class Record(RecordBase, Model):
 
     @staticmethod
     def prepare(owner, repo):
+        """
+        为 owner/repo 准备 Record 对象。当前需要修改 __tablename__ 为特定的表名。
+        :param owner:
+        :param repo:
+        :return:
+        """
         table_name = 'record_{repo_name}'.format(repo_name=repo)
         Record.__table__.name = table_name
 

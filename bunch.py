@@ -5,6 +5,9 @@ from nwpc_log.node import Node
 
 
 class Bunch(Node):
+    """
+    表示节点树
+    """
     def __init__(self):
         Node.__init__(self)
 
@@ -26,6 +29,11 @@ class Bunch(Node):
         return bunch
 
     def add_node(self, node_path):
+        """
+        添加路径的节点，如果添加成功，则返回添加的节点，否则返回 None
+        :param node_path: 待添加的节点路径
+        :return:
+        """
         if node_path == '/':
             return self
         node = None
@@ -69,7 +77,8 @@ class Bunch(Node):
 
     @staticmethod
     def generate_repo_tree_from_session(owner, repo, query_date, session):
-        """Generate repo tree on someday.
+        """
+        从数据库中某天的日志条目生成Bunch。
 
         :param owner: repo owner
         :param repo: repo name
@@ -77,7 +86,7 @@ class Bunch(Node):
         :param session: sql db connection session for
         :return: bunch object in dict.
         """
-        Record.__table__.name = "record_"+repo
+        Record.prepare(owner, repo)
         # get node list
         query = session.query(distinct(Record.record_fullname)) \
             .filter(Record.record_date == query_date) \
