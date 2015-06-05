@@ -60,8 +60,8 @@ class RepoVersion(Model):
     repo_version_id = Column(Integer, primary_key=True)
     repo_id = Column(Integer())
     version_id = Column(Integer())
-    version_name = Column(String(45))
-    version_location = Column(String(100))
+    version_name = Column(String(100))
+    version_location = Column(String(200))
     head_line = Column(Text())
     collector_id = Column(Text())
 
