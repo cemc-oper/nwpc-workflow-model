@@ -29,6 +29,32 @@ class Repo(Model):
     __tablename__ = "repo"
 
     repo_id = Column(Integer(), primary_key=True)
+    user_id = Column(Integer())
+
+    # 与 SmsRepo 中的 repo_name 重复，需要修改
+    repo_name = Column(String(45))
+
+    # repo 的类型：
+    #   sms
+    #   phy
+    repo_type = Column(String(45))
+
+    def __init__(self):
+        pass
+
+    def columns(self):
+        return [c.name for c in self.__table__.columns]
+
+    def to_dict(self):
+        return dict([(c, getattr(self, c)) for c in self.columns()])
+
+
+class SmsRepo(Model):
+    __tablename__ = "sms_repo"
+
+    # 仅该表中使用，其它表中使用 repo_id
+    sms_repo_id = Column(Integer(), primary_key=True)
+    repo_id = Column(Integer())
     user_id = Column(Integer)
     repo_name = Column(String(45))
     repo_location = Column(String(100))
