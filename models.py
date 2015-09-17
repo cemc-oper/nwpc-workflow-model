@@ -204,6 +204,13 @@ class RecordBase(object):
                 start_pos = end_pos + 4
                 end_pos = line.find(' ', start_pos)
                 self.record_additional_information = line[start_pos:end_pos]
+        elif self.record_command == 'delete':
+            start_pos = end_pos + 1
+            end_pos = line.find(' ', start_pos)
+            self.record_fullname = line[start_pos:end_pos]
+            start_pos = end_pos + 1
+            end_pos = line.find(' ', start_pos)
+            self.record_additional_information = line[start_pos:end_pos]
 
 
 class Record(RecordBase, Model):
