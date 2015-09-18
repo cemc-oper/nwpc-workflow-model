@@ -191,11 +191,24 @@ class RecordBase(object):
                 if end_pos != -1:
                     self.record_additional_information = line[start_pos:end_pos]
         elif self.record_command == 'meter':
-            start_pos = end_pos + 1
-            end_pos = line.find(' ', start_pos)
-            self.record_fullname = line[start_pos:end_pos]
-            start_pos = end_pos + 4
-            self.record_additional_information = line[start_pos:]
+            if self.record_type != 'ERR':
+                start_pos = end_pos + 1
+                end_pos = line.find(' ', start_pos)
+                self.record_fullname = line[start_pos:end_pos]
+                start_pos = end_pos + 4
+                self.record_additional_information = line[start_pos:]
+            else:
+                start_pos = end_pos + 1
+                if line[start_pos] == "/":
+                    # ERR:[12:52:00 19.5.2014] meter:/gmf_gsi_v1r5/T639/06/dasrefresh:WaitingMins: 55 out of range [0 - 40]
+                    end_pos = line.find(' ', start_pos)
+                    if end_pos != -1 and line[end_pos-1] == ":":
+                        self.record_fullname = line[start_pos: end_pos-1]
+                        self.record_additional_information = line[end_pos+1:]
+                else:
+                    # ERR:[03:41:58 10.7.2014] meter:WaitingMins for /grapes_meso_v4_0/cold/00/pre_data/obs_get/aob_get:the node was not found:
+                    pass
+
         elif self.record_command == 'begin':
             start_pos = end_pos + 1
             end_pos = line.find(' ', start_pos)
