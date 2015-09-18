@@ -183,9 +183,13 @@ class RecordBase(object):
                 self.record_additional_information = line[end_pos+1:]
         elif self.record_command == 'alter':
             start_pos = end_pos+1
-            pos = line.find(' [v', start_pos)
+            pos = line.find(' [', start_pos)
             if pos != -1:
                 self.record_fullname = line[start_pos:pos]
+                start_pos = pos + 2
+                end_pos = line.find('] ', start_pos)
+                if end_pos != -1:
+                    self.record_additional_information = line[start_pos:end_pos]
         elif self.record_command == 'meter':
             start_pos = end_pos + 1
             end_pos = line.find(' ', start_pos)
