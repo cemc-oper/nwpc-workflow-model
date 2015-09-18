@@ -228,6 +228,12 @@ class RecordBase(object):
             start_pos = end_pos + 1
             end_pos = line.find(' ', start_pos)
             self.record_additional_information = line[start_pos:end_pos]
+        elif self.record_command in ['set', 'clear']:
+            start_pos = end_pos + 1
+            end_pos = line.find(':', start_pos)
+            if end_pos != -1:
+                self.record_fullname = line[start_pos: end_pos]
+                self.record_additional_information = line[end_pos+1:]
 
 
 class Record(RecordBase, Model):
