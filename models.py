@@ -209,7 +209,7 @@ class RecordBase(object):
                     # ERR:[03:41:58 10.7.2014] meter:WaitingMins for /grapes_meso_v4_0/cold/00/pre_data/obs_get/aob_get:the node was not found:
                     pass
 
-        elif self.record_command == 'begin':
+        elif self.record_command in ['begin', 'autorepeat date']:
             start_pos = end_pos + 1
             end_pos = line.find(' ', start_pos)
             self.record_fullname = line[start_pos: end_pos]
