@@ -181,6 +181,7 @@ class RecordBase(object):
             else:
                 self.record_fullname = line[start_pos:end_pos]
                 self.record_additional_information = line[end_pos+1:]
+
         elif self.record_command == 'alter':
             start_pos = end_pos+1
             pos = line.find(' [', start_pos)
@@ -190,6 +191,7 @@ class RecordBase(object):
                 end_pos = line.find('] ', start_pos)
                 if end_pos != -1:
                     self.record_additional_information = line[start_pos:end_pos]
+
         elif self.record_command == 'meter':
             if self.record_type != 'ERR':
                 start_pos = end_pos + 1
@@ -213,6 +215,7 @@ class RecordBase(object):
             start_pos = end_pos + 1
             end_pos = line.find(' ', start_pos)
             self.record_fullname = line[start_pos: end_pos]
+
         elif self.record_command == 'force' or self.record_command == 'force(recursively)':
             start_pos = end_pos + 1
             end_pos = line.find(' ', start_pos)
@@ -221,6 +224,7 @@ class RecordBase(object):
                 start_pos = end_pos + 4
                 end_pos = line.find(' ', start_pos)
                 self.record_additional_information = line[start_pos:end_pos]
+
         elif self.record_command == 'delete':
             start_pos = end_pos + 1
             end_pos = line.find(' ', start_pos)
@@ -228,12 +232,30 @@ class RecordBase(object):
             start_pos = end_pos + 1
             end_pos = line.find(' ', start_pos)
             self.record_additional_information = line[start_pos:end_pos]
+
         elif self.record_command in ['set', 'clear']:
             start_pos = end_pos + 1
             end_pos = line.find(':', start_pos)
             if end_pos != -1:
                 self.record_fullname = line[start_pos: end_pos]
                 self.record_additional_information = line[end_pos+1:]
+
+        # WAR:[23:37:08 16.8.2015] requeue:/gmf_grapes_v1423/grapes_global/12/post/postp_084 from aborted
+	    # MSG:[23:37:08 16.8.2015] requeue:user nwp@5986333:/gmf_grapes_v1423/grapes_global/12/post/postp_084
+        elif self.record_command == 'requeue':
+            start_pos = end_pos + 1
+            if self.record_type == "WAR":
+                end_pos = line.find(' ', start_pos)
+                if end_pos != -1:
+                    self.record_fullname = line[start_pos: end_pos]
+                    start_pos = end_pos + 1
+                    self.record_additional_information = line[start_pos:]
+            elif self.record_type == "MSG":
+                end_pos = line.find(':', start_pos)
+                if end_pos != -1:
+                    self.record_additional_information = line[start_pos: end_pos]
+                    start_pos = end_pos + 1
+                    self.record_fullname = line[start_pos:]
 
 
 class Record(RecordBase, Model):
