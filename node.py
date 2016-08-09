@@ -46,6 +46,21 @@ class Node(object):
         return self.get_node_path()
 
     def to_dict(self):
+        """
+
+        :return:
+            {
+                'name': str, node name,
+                'node_type': str, node type,
+                'node_path': str, node path,
+                'children': array, [
+                    node dict,
+                    node dict,
+                    ...
+                ]
+
+            }
+        """
         ret = dict()
         ret['name'] = self.name
         ret['children'] = list()
