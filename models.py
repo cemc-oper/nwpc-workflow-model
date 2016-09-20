@@ -289,4 +289,3 @@ class Record(RecordBase, Model):
 
     def to_dict(self):
         return dict([(c, getattr(self, c)) for c in self.columns()])
-
