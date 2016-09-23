@@ -3,7 +3,7 @@ import datetime
 
 from sqlalchemy import asc
 
-from nwpc_log.models import Record
+from nwpc_log_model.models import Record
 
 
 class NodeStatus(object):

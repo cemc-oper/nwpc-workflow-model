@@ -1,5 +1,5 @@
 # coding=utf-8
-from nwpc_log.models import Record
+from nwpc_log_model.models import Record
 
 
 class NodeType(object):

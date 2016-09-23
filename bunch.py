@@ -1,7 +1,8 @@
 # coding=utf-8
 from sqlalchemy import distinct
-from nwpc_log.models import Record
+
 from nwpc_log.node import Node
+from nwpc_log_model.models import Record
 
 
 class Bunch(Node):
