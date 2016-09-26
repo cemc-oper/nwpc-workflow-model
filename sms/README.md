@@ -1,6 +1,6 @@
-# sms-log
+# nwpc-work-flow-model/sms
 
-SMS Log项目的通用模型类，包括树、节点、节点状态、访问函数等。
+SMS 项目的通用模型类，包括树、节点、节点状态、访问函数等。
 
 ## node
 

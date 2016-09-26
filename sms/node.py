@@ -34,6 +34,7 @@ class NodeType(object):
     def get_node_type_string(node_type):
         return NodeType.node_type_mapper[node_type]
 
+
 """
 Node:
 
@@ -122,21 +123,6 @@ class Node(object):
     def add_child(self, node):
         self.children.append(node)
 
-    def is_leaf(self):
-        if len(self.children) == 0:
-            return True
-        else:
-            # check whether child is an alias
-            alias_flag = False
-            for a_child in self.children:
-                if a_child.is_alias():
-                    alias_flag = True
-                    break
-            if alias_flag:
-                return True
-            else:
-                return False
-
     def get_node_path(self):
         cur_node = self
         node_list = []
@@ -166,14 +152,27 @@ class Node(object):
     def get_node_type_string(self):
         return NodeType.get_node_type_string(self.get_node_type())
 
+    def is_leaf(self):
+        if len(self.children) == 0:
+            return True
+        else:
+            # check whether child is an alias
+            alias_flag = False
+            for a_child in self.children:
+                if a_child.is_alias():
+                    alias_flag = True
+                    break
+            if alias_flag:
+                return True
+            else:
+                return False
+
     def is_suite(self):
         if self.parent:
             parent = self.parent
             if parent.parent is None:
                 return True
         return False
-
-
 
     def is_alias(self):
         if len(self.children) != 0:
