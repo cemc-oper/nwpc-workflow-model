@@ -66,7 +66,7 @@ class Node(object):
         ret['node_path'] = self.get_node_path()
         ret['path'] = self.get_node_path()
 
-        ret['status'] = self.status
+        ret['status'] = self.status.value
 
         for a_child in self.children:
             ret['children'].append(a_child.to_dict())

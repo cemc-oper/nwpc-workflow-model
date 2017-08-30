@@ -1,6 +1,6 @@
 import unittest
 
-from nwpc_work_flow_model.sms import Node, NodeType
+from nwpc_work_flow_model.sms import Node, NodeType, NodeStatus
 
 
 class TestNode(unittest.TestCase):
@@ -88,7 +88,7 @@ class TestNode(unittest.TestCase):
         self.assertIsInstance(node.children, list)
         self.assertEqual(len(node.children), 0)
         self.assertEqual(node.name, '')
-        self.assertEqual(node.status, 'unk')
+        self.assertEqual(node.status, NodeStatus.Unknown)
 
     def test_add_child(self):
         self.assertEqual(
@@ -293,10 +293,10 @@ class TestNode(unittest.TestCase):
         self.assertEqual(family1.get_node_path(), '/suite1/family1')
         self.assertEqual(task1.get_node_path(), '/suite1/family1/task1')
 
-        self.assertEqual(root.status, 'act')
-        self.assertEqual(suite1.status, 'act')
-        self.assertEqual(family1.status, 'act')
-        self.assertEqual(task1.status, 'act')
+        self.assertEqual(root.status, NodeStatus.Active)
+        self.assertEqual(suite1.status, NodeStatus.Active)
+        self.assertEqual(family1.status, NodeStatus.Active)
+        self.assertEqual(task1.status, NodeStatus.Active)
 
         self.assertEqual(root.parent, None)
         self.assertEqual(suite1.parent, root)
