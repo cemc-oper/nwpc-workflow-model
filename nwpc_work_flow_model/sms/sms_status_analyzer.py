@@ -1,5 +1,6 @@
 # coding: utf-8
 import re
+from nwpc_work_flow_model.sms import Bunch, NodeStatus
 
 
 class SmsStatusAnalyzer(object):
@@ -18,7 +19,6 @@ class SmsStatusAnalyzer(object):
         #   'name': 'obs_reg'
         #   'status': 'com'
         # }
-        self.node_status_list = []
         self.bunch = Bunch()
 
     def analytic_tokens(self, line_start_pos, line_tokens):
@@ -38,21 +38,12 @@ class SmsStatusAnalyzer(object):
                 self.cur_node_path = '/'.join(new_node_path_tokens)
             self.cur_level += 1
             node_path = self.cur_node_path + '/' + node_name_part
-            if self.cur_level == 1:
-                node_type = 'suite'
-            elif blank_part_one[-1] == '{':
-                node_type = 'family'
-            elif blank_part_one[-1] == '[':
-                node_type = 'task'
-            else:
-                node_type = 'unknown'
             status_item = {
                 'path': node_path,
                 'name': node_name_part,
-                'status': status_part,
-                'node_type': node_type
+                'status': NodeStatus(status_part)
             }
-            self.node_status_list.append(status_item)
+            self.bunch.add_node_status(status_item)
             self.cur_node_path = node_path
             cur_pos += len(node_name_part) + len(blank_part_one) + len(status_part) + len(blank_part_two)
 
@@ -71,11 +62,10 @@ class SmsStatusAnalyzer(object):
         cur_line = lines[cur_line_no].rstrip(' ')
         first_level = {
             'path': '/',
-            'name': '/',
-            'status': cur_line[2:5],
-            'node_type': 'server'
+            'name': '',
+            'status': NodeStatus(cur_line[2:5])
         }
-        self.node_status_list.append(first_level)
+        self.bunch.add_node_status(first_level)
         tokens = re.split('(\W+|\{[a-z]{3}\}|\[[a-z]{3}\])', cur_line)
         start_pos = len(tokens[0]) + len(tokens[1]) + len(tokens[2]) + len(tokens[3])
         self.analytic_tokens(start_pos, tokens[4:])
@@ -91,4 +81,4 @@ class SmsStatusAnalyzer(object):
             start_pos = len(tokens[0]) + len(tokens[1])
             self.analytic_tokens(start_pos, tokens[2:])
             cur_line_no += 1
-        return self.node_status_list
+        return self.bunch

@@ -1,5 +1,6 @@
 import os
 
+from nwpc_work_flow_model.sms import NodeStatus, NodeType
 from nwpc_work_flow_model.sms.sms_status_analyzer import SmsStatusAnalyzer
 
 
@@ -12,6 +13,24 @@ class TestSmsStatusAnalyzer:
         with open(os.path.dirname(__file__) + "/data/cdp/status/normal_status.txt") as f:
             cdp_output = f.readlines()
             analyzer = SmsStatusAnalyzer()
-            node_status_list = analyzer.analyse_node_status(cdp_output)
-            for node_status in node_status_list:
-                print(node_status['path'])
+            bunch = analyzer.analyse_node_status(cdp_output)
+
+            node = bunch.find_node("/Web_post")
+            assert node is not None
+            assert node.status == NodeStatus.Queued
+            assert node.get_node_type() == NodeType.Suite
+
+            node = bunch.find_node("/Web_post/checker/GRAPES_MESO/12/00")
+            assert node is not None
+            assert node.status == NodeStatus.Complete
+            assert node.get_node_type() == NodeType.Family
+
+            node = bunch.find_node("/Web_post/checker/GRAPES_MESO/12/01/get_result_00")
+            assert node is not None
+            assert node.status == NodeStatus.Complete
+            assert node.get_node_type() == NodeType.Task
+
+            node = bunch.find_node("/Web_post/checker/GRAPES_MESO/00/11/get_result_00")
+            assert node is not None
+            assert node.status == NodeStatus.Queued
+            assert node.get_node_type() == NodeType.Task
