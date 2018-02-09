@@ -1,5 +1,4 @@
-from .node import Node
-from .node_status import NodeStatus
+from .node import Node, NodeStatus
 
 
 class Bunch(Node):
