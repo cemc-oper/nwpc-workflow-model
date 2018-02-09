@@ -1,8 +1,8 @@
 import os
-from nwpc_work_flow_model.sms.sms_node import SmsNode
-from nwpc_work_flow_model.sms.node_status import NodeStatus
-from nwpc_work_flow_model.sms.node_type import NodeType
-from nwpc_work_flow_model.sms.node_variable import SmsNodeVariableType, SmsNodeVariable
+from nwpc_workflow_model.sms.sms_node import SmsNode
+from nwpc_workflow_model.sms.node_status import NodeStatus
+from nwpc_workflow_model.sms.node_type import NodeType
+from nwpc_workflow_model.sms.node_variable import SmsNodeVariableType, SmsNodeVariable
 
 
 class TestSmsNode(object):

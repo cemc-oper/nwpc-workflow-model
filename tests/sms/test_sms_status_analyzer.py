@@ -1,7 +1,7 @@
 import os
 
-from nwpc_work_flow_model.sms import NodeStatus, NodeType
-from nwpc_work_flow_model.sms.sms_status_analyzer import SmsStatusAnalyzer
+from nwpc_workflow_model.sms import NodeStatus, NodeType
+from nwpc_workflow_model.sms.sms_status_analyzer import SmsStatusAnalyzer
 
 
 class TestSmsStatusAnalyzer:

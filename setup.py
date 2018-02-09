@@ -8,14 +8,14 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='nwpc-work-flow-model',
+    name='nwpc-workflow-model',
 
-    version='0.2.0',
+    version='0.3.0',
 
-    description='A work flow model using in operation systems at NWPC.',
+    description='A workflow model using in operation systems at NWPC.',
     long_description=long_description,
 
-    url='https://github.com/perillaroc/nwpc-work-flow-model',
+    url='https://github.com/perillaroc/nwpc-workflow-model',
 
     author='perillaroc',
     author_email='perillaroc@gmail.com',

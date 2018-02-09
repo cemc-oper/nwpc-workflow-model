@@ -1,5 +1,5 @@
 import pytest
-from nwpc_work_flow_model.sms import NodeStatus
+from nwpc_workflow_model.sms import NodeStatus
 
 
 class TestNodeStatus:

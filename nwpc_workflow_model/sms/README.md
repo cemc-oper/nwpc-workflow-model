@@ -1,4 +1,4 @@
-# An NWPC work flow model for SMS
+# An NWPC workflow model for SMS
 
 A general model for NWPC's SMS projects, including tree, node, node status, visitor functions and so on.
 

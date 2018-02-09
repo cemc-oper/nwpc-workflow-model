@@ -1,6 +1,6 @@
 import unittest
 
-from nwpc_work_flow_model.sms import Node, NodeType, NodeStatus
+from nwpc_workflow_model.sms import Node, NodeType, NodeStatus
 
 
 class TestNode(unittest.TestCase):

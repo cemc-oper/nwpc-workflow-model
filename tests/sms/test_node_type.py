@@ -1,6 +1,6 @@
 # coding: utf-8
 import pytest
-from nwpc_work_flow_model.sms import NodeType
+from nwpc_workflow_model.sms import NodeType
 
 
 class TestNodeType:

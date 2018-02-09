@@ -1,6 +1,6 @@
 import unittest
 
-from nwpc_work_flow_model.sms import Bunch, Node, NodeStatus
+from nwpc_workflow_model.sms import Bunch, Node, NodeStatus
 
 
 class TestBunch(unittest.TestCase):
