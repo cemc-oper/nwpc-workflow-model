@@ -9,7 +9,8 @@ In NWPC, we run tasks using a workflow software, such as SMS and ecFLow.
 
 ## Components
 
-Only SMS is supported at this moment. Please see `nwpc_workflow_model/sms/README.md` for more information.
+Only SMS is supported at this moment. 
+Please see [nwpc_workflow_model/sms/README.md](nwpc_workflow_model/sms/README.md) for more information.
 
 ## Tests
 
@@ -17,6 +18,6 @@ Use `pytest` to run tests.
 
 ## License
 
-Copyright (C) 2016-2017 Perilla Roc.
+Copyright &copy; 2016-2018 Perilla Roc.
 
 `nwpc-workflow-model` is licensed under [The MIT License](https://opensource.org/licenses/MIT).

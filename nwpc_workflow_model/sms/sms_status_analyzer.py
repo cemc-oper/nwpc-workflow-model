@@ -1,6 +1,6 @@
 # coding: utf-8
 import re
-from nwpc_workflow_model.sms import Bunch, NodeStatus
+from nwpc_workflow_model import Bunch, NodeStatus
 
 
 class SmsStatusAnalyzer(object):

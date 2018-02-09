@@ -1,4 +1,4 @@
-from nwpc_workflow_model.sms import Bunch, Node, NodeVisitor, pre_order_travel, SimplePrintVisitor
+from nwpc_workflow_model import Bunch, Node, NodeVisitor, pre_order_travel, SimplePrintVisitor
 
 
 class NodeListVisitor(NodeVisitor):

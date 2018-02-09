@@ -1,4 +1,3 @@
-import os
 from nwpc_workflow_model.sms.node_variable import SmsNodeVariable, SmsNodeVariableType
 
 

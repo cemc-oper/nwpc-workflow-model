@@ -1,5 +1,4 @@
-from .node_variable import SmsNodeVariable, SmsNodeVariableType
-from .node_type import NodeType
+from nwpc_workflow_model.sms.node_variable import SmsNodeVariable, SmsNodeVariableType
 
 
 class SmsNode(object):
