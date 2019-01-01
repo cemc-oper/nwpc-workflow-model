@@ -34,6 +34,6 @@ Use `pytest` to run tests.
 
 ## License
 
-Copyright &copy; 2016-2018 Perilla Roc.
+Copyright &copy; 2016-2019 Perilla Roc.
 
 `nwpc-workflow-model` is licensed under [The MIT License](https://opensource.org/licenses/MIT).
