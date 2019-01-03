@@ -12,6 +12,6 @@ class NodeType(Enum):
     NonTaskNode = 'non-task'
     Meter = 'meter'
 
-    @staticmethod
-    def get_node_type_string(node_type):
+    @classmethod
+    def get_node_type_string(cls, node_type):
         return node_type.value

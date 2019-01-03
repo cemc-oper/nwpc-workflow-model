@@ -75,7 +75,7 @@ class TestEcflowNode(object):
         node_dict = {
             'name': 'node name',
             'status': NodeStatus.unknown,
-            'node_type': NodeType.suite,
+            'node_type': NodeType.Suite,
             'variable_list': [
                 {
                     'name': 'var name',

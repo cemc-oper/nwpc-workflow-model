@@ -1,4 +1,4 @@
-from .node_type import NodeType
+from nwpc_workflow_model.node_type import NodeType
 from nwpc_workflow_model.node_status import NodeStatus
 
 

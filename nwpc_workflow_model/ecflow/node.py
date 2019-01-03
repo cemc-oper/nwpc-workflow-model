@@ -1,5 +1,5 @@
 # coding=utf-8
-from .node_type import NodeType
+from nwpc_workflow_model.node_type import NodeType
 from nwpc_workflow_model.node_status import NodeStatus
 
 
@@ -103,24 +103,24 @@ class Node(object):
 
     def get_node_type(self):
         if self.parent is None:
-            return NodeType.root
+            return NodeType.Root
 
         if self.parent.parent is None:
-            return NodeType.suite
+            return NodeType.Suite
 
         if len(self.children) > 0:
             if self.children[0].is_alias():
-                return NodeType.task
+                return NodeType.Task
             else:
-                return NodeType.family
+                return NodeType.Family
         else:
             if self.name.find(":") != -1:
-                return NodeType.nonTaskNode
+                return NodeType.NonTaskNode
             else:
                 if self.is_alias():
-                    return NodeType.alias
+                    return NodeType.Alias
                 else:
-                    return NodeType.task
+                    return NodeType.Task
 
     def get_node_type_string(self):
         return NodeType.get_node_type_string(self.get_node_type())
