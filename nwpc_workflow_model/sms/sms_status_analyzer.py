@@ -66,7 +66,7 @@ class SmsStatusAnalyzer(object):
             'status': NodeStatus(cur_line[2:5])
         }
         self.bunch.add_node_status(first_level)
-        tokens = re.split('(\W+|\{[a-z]{3}\}|\[[a-z]{3}\])', cur_line)
+        tokens = re.split(r'(\W+|\{[a-z]{3}\}|\[[a-z]{3}\])', cur_line)
         start_pos = len(tokens[0]) + len(tokens[1]) + len(tokens[2]) + len(tokens[3])
         self.analytic_tokens(start_pos, tokens[4:])
         cur_line_no += 1
@@ -74,7 +74,7 @@ class SmsStatusAnalyzer(object):
             cur_line = lines[cur_line_no].rstrip(' ')
             # 使用 re.split('( +)', cur_line) 无法处理如下的特殊情况
             # 特殊情况：make_aob_rens_oracle{com}
-            tokens = re.split('(\W+|\{[a-z]{3}\}|\[[a-z]{3}\])', cur_line)
+            tokens = re.split(r'(\W+|\{[a-z]{3}\}|\[[a-z]{3}\])', cur_line)
             if len(tokens) <= 5:
                 cur_line_no += 1
                 continue
