@@ -1,4 +1,5 @@
-from .node_variable import SmsNodeVariable, SmsNodeVariableType
+# coding: utf-8
+from nwpc_workflow_model.node_variable import NodeVariable, NodeVariableType
 
 
 class SmsNode(object):
@@ -10,8 +11,8 @@ class SmsNode(object):
         inherited_variable_list, an array of objects as follows:
             {
                 'path': node_path,
-                'variable_list': variable list,
-                'generated_variable_list': generated variable list
+                'variable_list': Variable list,
+                'generated_variable_list': generated Variable list
             }
         """
         self.inherited_variable_list = []
@@ -83,8 +84,8 @@ class SmsNode(object):
                 variable_value = line[index + 1:]
                 if variable_value[0] == '\'' and variable_value[-1] == '\'':
                     variable_value = variable_value[1:-1]
-                variable = SmsNodeVariable(
-                    SmsNodeVariableType.GeneratedVariable,
+                variable = NodeVariable(
+                    NodeVariableType.GeneratedVariable,
                     variable_name,
                     variable_value
                 )
@@ -97,8 +98,8 @@ class SmsNode(object):
                 variable_value = line[index + 1:]
                 if variable_value[0] == '\'' and variable_value[-1] == '\'':
                     variable_value = variable_value[1:-1]
-                variable = SmsNodeVariable(
-                    SmsNodeVariableType.Variable,
+                variable = NodeVariable(
+                    NodeVariableType.Variable,
                     variable_name,
                     variable_value
                 )
@@ -155,16 +156,16 @@ class SmsNode(object):
             name_start = 0
             value_end = path_start-2
             if variable_line[0] == '(':
-                variable_type = SmsNodeVariableType.GeneratedVariable
+                variable_type = NodeVariableType.GeneratedVariable
                 name_start += 1
             else:
-                variable_type = SmsNodeVariableType.Variable
+                variable_type = NodeVariableType.Variable
 
             equal_index = variable_line.index('=')
             var_name = variable_line[name_start:equal_index].strip()
             var_value = variable_line[equal_index+2:value_end].strip()
 
-            variable = SmsNodeVariable(name=var_name, value=var_value, variable_type=variable_type)
+            variable = NodeVariable(name=var_name, value=var_value, variable_type=variable_type)
             return variable
 
         for a_variable_line in cdp_output[variable_start_line_no: variable_end_line_no]:
@@ -173,7 +174,7 @@ class SmsNode(object):
             node_path = a_variable_line[path_start+1:-1]
             if len(node_path) == 0:
                 variable = get_variable_from_variable_line(a_variable_line, path_start)
-                if variable.variable_type == SmsNodeVariableType.Variable:
+                if variable.variable_type == NodeVariableType.Variable:
                     node.variable_list.append(variable)
                 else:
                     node.generated_variable_list.append(variable)
@@ -187,7 +188,7 @@ class SmsNode(object):
                     })
 
                 variable = get_variable_from_variable_line(a_variable_line, path_start)
-                if variable.variable_type == SmsNodeVariableType.Variable:
+                if variable.variable_type == NodeVariableType.Variable:
                     node.inherited_variable_list[-1]['variable_list'].append(variable)
                 else:
                     node.inherited_variable_list[-1]['generated_variable_list'].append(variable)
@@ -218,19 +219,19 @@ class SmsNode(object):
         node.status = node_dict['status']
         node.node_type = node_dict['node_type']
         for a_var_dict in node_dict['variable_list']:
-            a_var = SmsNodeVariable.create_from_dict(a_var_dict)
+            a_var = NodeVariable.create_from_dict(a_var_dict)
             node.variable_list.append(a_var)
         for a_var_dict in node_dict['generated_variable_list']:
-            a_var = SmsNodeVariable.create_from_dict(a_var_dict)
+            a_var = NodeVariable.create_from_dict(a_var_dict)
             node.generated_variable_list.append(a_var)
 
         for a_parent in node_dict['inherited_variable_list']:
             node.inherited_variable_list.append({
                 'path': a_parent['path'],
-                'variable_list': [SmsNodeVariable.create_from_dict(a_var_dict)
+                'variable_list': [NodeVariable.create_from_dict(a_var_dict)
                                   for a_var_dict in a_parent['variable_list']],
-                'generated_variable_list': [SmsNodeVariable.create_from_dict(a_var_dict)
-                                  for a_var_dict in a_parent['generated_variable_list']]
+                'generated_variable_list': [NodeVariable.create_from_dict(a_var_dict)
+                                            for a_var_dict in a_parent['generated_variable_list']]
             })
 
         return node

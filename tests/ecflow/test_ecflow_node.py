@@ -1,7 +1,6 @@
-import os
 from nwpc_workflow_model.ecflow.ecflow_node import EcflowNode
 from nwpc_workflow_model.ecflow import NodeStatus, NodeType
-from nwpc_workflow_model.ecflow.node_variable import NodeVariableType, NodeVariable
+from nwpc_workflow_model.node_variable import NodeVariableType, NodeVariable
 
 
 class TestEcflowNode(object):
@@ -9,14 +8,14 @@ class TestEcflowNode(object):
     def create_node():
         node = EcflowNode()
         node.variable_list.extend([
-            NodeVariable(NodeVariableType.variable, 'self_var_1', 'self_var_1_value'),
-            NodeVariable(NodeVariableType.variable, 'var', 'var1'),
-            NodeVariable(NodeVariableType.variable, 'father_var_2', 'father_var_2_in_node'),
+            NodeVariable(NodeVariableType.Variable, 'self_var_1', 'self_var_1_value'),
+            NodeVariable(NodeVariableType.Variable, 'var', 'var1'),
+            NodeVariable(NodeVariableType.Variable, 'father_var_2', 'father_var_2_in_node'),
         ])
 
         node.generated_variable_list.extend([
-            NodeVariable(NodeVariableType.generatedVariable, 'self_gen_var_1', 'self_gen_var_1_value'),
-            NodeVariable(NodeVariableType.generatedVariable, 'var', 'var2')
+            NodeVariable(NodeVariableType.GeneratedVariable, 'self_gen_var_1', 'self_gen_var_1_value'),
+            NodeVariable(NodeVariableType.GeneratedVariable, 'var', 'var2')
         ])
 
         # root_node -> father_node -> node
@@ -24,22 +23,22 @@ class TestEcflowNode(object):
             {
                 'path': '/root/father',
                 'variable_list': [
-                    NodeVariable(NodeVariableType.variable, 'father_var', 'father_var_value'),
-                    NodeVariable(NodeVariableType.variable, 'father_var_2', 'father_var_2_value'),
-                    NodeVariable(NodeVariableType.variable, 'root_var_2', 'root_var_2_value_in_father')
+                    NodeVariable(NodeVariableType.Variable, 'father_var', 'father_var_value'),
+                    NodeVariable(NodeVariableType.Variable, 'father_var_2', 'father_var_2_value'),
+                    NodeVariable(NodeVariableType.Variable, 'root_var_2', 'root_var_2_value_in_father')
                 ],
                 'generated_variable_list': [
-                    NodeVariable(NodeVariableType.variable, 'father_gen_var', 'father_gen_var_value')
+                    NodeVariable(NodeVariableType.Variable, 'father_gen_var', 'father_gen_var_value')
                 ]
             },
             {
                 'path': '/root',
                 'variable_list': [
-                    NodeVariable(NodeVariableType.variable, 'root_var', 'root_var_value'),
-                    NodeVariable(NodeVariableType.variable, 'root_var_2', 'root_var_2_value')
+                    NodeVariable(NodeVariableType.Variable, 'root_var', 'root_var_value'),
+                    NodeVariable(NodeVariableType.Variable, 'root_var_2', 'root_var_2_value')
                 ],
                 'generated_variable_list': [
-                    NodeVariable(NodeVariableType.variable, 'root_gen_var', 'root_gen_var_value')
+                    NodeVariable(NodeVariableType.Variable, 'root_gen_var', 'root_gen_var_value')
                 ]
             }
         ])
@@ -52,9 +51,9 @@ class TestEcflowNode(object):
         assert node.get_variable_value('self_var_1') == 'self_var_1_value'
         assert node.get_variable_value('self_gen_var_1') == 'self_gen_var_1_value'
 
-        # variable type overrides generated variable type.
+        # Variable type overrides generated Variable type.
         assert node.get_variable_value('var') == 'var1'
-        assert node.get_variable('var').variable_type == NodeVariableType.variable
+        assert node.get_variable('var').variable_type == NodeVariableType.Variable
 
         # inherited variables
         assert node.get_variable_value('father_var') == 'father_var_value'
@@ -79,14 +78,14 @@ class TestEcflowNode(object):
             'variable_list': [
                 {
                     'name': 'var name',
-                    'variable_type': NodeVariableType.variable,
+                    'variable_type': NodeVariableType.Variable,
                     'value': 'var value'
                 }
             ],
             'generated_variable_list': [
                 {
                     'name': 'gen var name',
-                    'variable_type': NodeVariableType.generatedVariable,
+                    'variable_type': NodeVariableType.GeneratedVariable,
                     'value': 'gen var value'
                 }
             ],
@@ -96,14 +95,14 @@ class TestEcflowNode(object):
                     'variable_list': [
                         {
                             'name': 'father var name',
-                            'variable_type': NodeVariableType.variable,
+                            'variable_type': NodeVariableType.Variable,
                             'value': 'father var value'
                         }
                     ],
                     'generated_variable_list': [
                         {
                             'name': 'father gen var name',
-                            'variable_type': NodeVariableType.generatedVariable,
+                            'variable_type': NodeVariableType.GeneratedVariable,
                             'value': 'father gen var value'
                         }
                     ]
@@ -113,14 +112,14 @@ class TestEcflowNode(object):
                     'variable_list': [
                         {
                             'name': 'root var name',
-                            'variable_type': NodeVariableType.variable,
+                            'variable_type': NodeVariableType.Variable,
                             'value': 'root var value'
                         }
                     ],
                     'generated_variable_list': [
                         {
                             'name': 'root gen var name',
-                            'variable_type': NodeVariableType.generatedVariable,
+                            'variable_type': NodeVariableType.GeneratedVariable,
                             'value': 'root gen var value'
                         }
                     ]

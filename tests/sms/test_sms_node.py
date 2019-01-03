@@ -1,7 +1,7 @@
 import os
+from nwpc_workflow_model.node_variable import NodeVariableType, NodeVariable
 from nwpc_workflow_model.sms.sms_node import SmsNode
 from nwpc_workflow_model.sms import NodeStatus, NodeType
-from nwpc_workflow_model.sms.node_variable import SmsNodeVariableType, SmsNodeVariable
 
 
 class TestSmsNode(object):
@@ -9,14 +9,14 @@ class TestSmsNode(object):
     def create_node():
         node = SmsNode()
         node.variable_list.extend([
-            SmsNodeVariable(SmsNodeVariableType.Variable, 'self_var_1', 'self_var_1_value'),
-            SmsNodeVariable(SmsNodeVariableType.Variable, 'var', 'var1'),
-            SmsNodeVariable(SmsNodeVariableType.Variable, 'father_var_2', 'father_var_2_in_node'),
+            NodeVariable(NodeVariableType.Variable, 'self_var_1', 'self_var_1_value'),
+            NodeVariable(NodeVariableType.Variable, 'var', 'var1'),
+            NodeVariable(NodeVariableType.Variable, 'father_var_2', 'father_var_2_in_node'),
         ])
 
         node.generated_variable_list.extend([
-            SmsNodeVariable(SmsNodeVariableType.GeneratedVariable, 'self_gen_var_1', 'self_gen_var_1_value'),
-            SmsNodeVariable(SmsNodeVariableType.GeneratedVariable, 'var', 'var2')
+            NodeVariable(NodeVariableType.GeneratedVariable, 'self_gen_var_1', 'self_gen_var_1_value'),
+            NodeVariable(NodeVariableType.GeneratedVariable, 'var', 'var2')
         ])
 
         # root_node -> father_node -> node
@@ -24,22 +24,22 @@ class TestSmsNode(object):
             {
                 'path': '/root/father',
                 'variable_list': [
-                    SmsNodeVariable(SmsNodeVariableType.Variable, 'father_var', 'father_var_value'),
-                    SmsNodeVariable(SmsNodeVariableType.Variable, 'father_var_2', 'father_var_2_value'),
-                    SmsNodeVariable(SmsNodeVariableType.Variable, 'root_var_2', 'root_var_2_value_in_father')
+                    NodeVariable(NodeVariableType.Variable, 'father_var', 'father_var_value'),
+                    NodeVariable(NodeVariableType.Variable, 'father_var_2', 'father_var_2_value'),
+                    NodeVariable(NodeVariableType.Variable, 'root_var_2', 'root_var_2_value_in_father')
                 ],
                 'generated_variable_list': [
-                    SmsNodeVariable(SmsNodeVariableType.Variable, 'father_gen_var', 'father_gen_var_value')
+                    NodeVariable(NodeVariableType.Variable, 'father_gen_var', 'father_gen_var_value')
                 ]
             },
             {
                 'path': '/root',
                 'variable_list': [
-                    SmsNodeVariable(SmsNodeVariableType.Variable, 'root_var', 'root_var_value'),
-                    SmsNodeVariable(SmsNodeVariableType.Variable, 'root_var_2', 'root_var_2_value')
+                    NodeVariable(NodeVariableType.Variable, 'root_var', 'root_var_value'),
+                    NodeVariable(NodeVariableType.Variable, 'root_var_2', 'root_var_2_value')
                 ],
                 'generated_variable_list': [
-                    SmsNodeVariable(SmsNodeVariableType.Variable, 'root_gen_var', 'root_gen_var_value')
+                    NodeVariable(NodeVariableType.Variable, 'root_gen_var', 'root_gen_var_value')
                 ]
             }
         ])
@@ -52,9 +52,9 @@ class TestSmsNode(object):
         assert node.get_variable_value('self_var_1') == 'self_var_1_value'
         assert node.get_variable_value('self_gen_var_1') == 'self_gen_var_1_value'
 
-        # Variable type overrides generated variable type.
+        # Variable type overrides generated Variable type.
         assert node.get_variable_value('var') == 'var1'
-        assert node.get_variable('var').variable_type == SmsNodeVariableType.Variable
+        assert node.get_variable('var').variable_type == NodeVariableType.Variable
 
         # inherited variables
         assert node.get_variable_value('father_var') == 'father_var_value'
@@ -120,14 +120,14 @@ class TestSmsNode(object):
             'variable_list': [
                 {
                     'name': 'var name',
-                    'variable_type': SmsNodeVariableType.Variable,
+                    'variable_type': NodeVariableType.Variable,
                     'value': 'var value'
                 }
             ],
             'generated_variable_list': [
                 {
                     'name': 'gen var name',
-                    'variable_type': SmsNodeVariableType.GeneratedVariable,
+                    'variable_type': NodeVariableType.GeneratedVariable,
                     'value': 'gen var value'
                 }
             ],
@@ -137,14 +137,14 @@ class TestSmsNode(object):
                     'variable_list': [
                         {
                             'name': 'father var name',
-                            'variable_type': SmsNodeVariableType.Variable,
+                            'variable_type': NodeVariableType.Variable,
                             'value': 'father var value'
                         }
                     ],
                     'generated_variable_list': [
                         {
                             'name': 'father gen var name',
-                            'variable_type': SmsNodeVariableType.GeneratedVariable,
+                            'variable_type': NodeVariableType.GeneratedVariable,
                             'value': 'father gen var value'
                         }
                     ]
@@ -154,14 +154,14 @@ class TestSmsNode(object):
                     'variable_list': [
                         {
                             'name': 'root var name',
-                            'variable_type': SmsNodeVariableType.Variable,
+                            'variable_type': NodeVariableType.Variable,
                             'value': 'root var value'
                         }
                     ],
                     'generated_variable_list': [
                         {
                             'name': 'root gen var name',
-                            'variable_type': SmsNodeVariableType.GeneratedVariable,
+                            'variable_type': NodeVariableType.GeneratedVariable,
                             'value': 'root gen var value'
                         }
                     ]

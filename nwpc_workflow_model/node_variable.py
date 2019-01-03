@@ -3,8 +3,8 @@ from enum import Enum
 
 
 class NodeVariableType(Enum):
-    variable = 'variable'
-    generatedVariable = 'generatedVariable'
+    Variable = 'Variable'
+    GeneratedVariable = 'generatedVariable'
 
 
 class NodeVariable(object):

@@ -1,7 +1,7 @@
 # coding: utf-8
 from nwpc_workflow_model.node_status import NodeStatus
 from nwpc_workflow_model.node_type import NodeType
-from .node_variable import NodeVariable, NodeVariableType
+from nwpc_workflow_model.node_variable import NodeVariable
 
 
 class EcflowNode(object):
@@ -13,8 +13,8 @@ class EcflowNode(object):
         inherited_variable_list, an array of objects as follows:
             {
                 'path': node_path,
-                'variable_list': variable list,
-                'generated_variable_list': generated variable list
+                'variable_list': Variable list,
+                'generated_variable_list': generated Variable list
             }
         """
         self.inherited_variable_list = []
