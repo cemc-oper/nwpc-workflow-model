@@ -1,5 +1,5 @@
 from .node_type import NodeType
-from .node_status import NodeStatus
+from nwpc_workflow_model.node_status import NodeStatus
 
 
 class Node(object):

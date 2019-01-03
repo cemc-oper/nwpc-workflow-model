@@ -1,6 +1,6 @@
 # coding: utf-8
 from .node_variable import NodeVariable, NodeVariableType
-from .node_status import NodeStatus
+from nwpc_workflow_model.node_status import NodeStatus
 from .node_type import NodeType
 
 

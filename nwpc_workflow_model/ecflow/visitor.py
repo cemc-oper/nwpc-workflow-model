@@ -1,5 +1,5 @@
 from nwpc_workflow_model.visitor import NodeVisitor
-from .node_status import NodeStatus
+from nwpc_workflow_model.node_status import NodeStatus
 
 
 class ErrorStatusTaskVisitor(NodeVisitor):
