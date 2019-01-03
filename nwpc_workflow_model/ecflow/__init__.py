@@ -1,9 +1,8 @@
 # coding=utf-8
 from nwpc_workflow_model.visitor import (
-    NodeVisitor, SimplePrintVisitor, pre_order_travel)
+    NodeVisitor, SimplePrintVisitor, ErrorStatusTaskVisitor, pre_order_travel)
 from nwpc_workflow_model.node_type import NodeType
 from nwpc_workflow_model.node_status import NodeStatus
 
 from .node import Node
 from .bunch import Bunch
-from .visitor import ErrorStatusTaskVisitor

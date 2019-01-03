@@ -1,3 +1,7 @@
+# coding: utf-8
+from .node_status import NodeStatus
+
+
 class NodeVisitor(object):
     def __init__(self):
         pass
@@ -57,6 +61,23 @@ class SubTreeNodeVisitor(NodeVisitor):
         if self.level == self.max_depth:
             del node['children']
             node['children'] = list()
+
+    def before_visit_child(self):
+        self.level += 1
+
+    def after_visit_child(self):
+        self.level -= 1
+
+
+class ErrorStatusTaskVisitor(NodeVisitor):
+    def __init__(self):
+        NodeVisitor.__init__(self)
+        self.level = 0
+        self.error_task_list = []
+
+    def visit(self, node):
+        if node.status in [NodeStatus.aborted, NodeStatus.Aborted] and node.is_leaf():
+            self.error_task_list.append(node)
 
     def before_visit_child(self):
         self.level += 1
