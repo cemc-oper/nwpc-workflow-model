@@ -14,6 +14,7 @@ setup(
 
     description='A workflow model using in operation systems at NWPC.',
     long_description=long_description,
+    long_description_content_type='text/markdown',
 
     url='https://github.com/perillaroc/nwpc-workflow-model',
 
@@ -26,7 +27,8 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7'
     ],
 
     keywords='nwpc workflow model',
@@ -37,6 +39,7 @@ setup(
 
     extras_require={
         'test': ['pytest'],
+        'cov': ['pytest-cov', 'codecov']
     },
 
     entry_points={}

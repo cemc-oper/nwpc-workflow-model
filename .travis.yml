@@ -5,8 +5,9 @@ python:
   - "nightly"
 
 install:
-  - pip install pytest pytest-cov codecov
   - pip install -e .
+  - pip install -e .[test]
+  - pip install -e .[cov]
 
 script:
   - pytest --cov=./
@@ -15,4 +16,4 @@ after_success:
   - codecov
 
 notifications:
-    email: false
+  email: false
