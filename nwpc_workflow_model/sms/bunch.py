@@ -9,4 +9,4 @@ class Bunch(BaseBunch):
         self.parent = None
         self.children = list()
         self.name = ''
-        self.status = NodeStatus.get_node_status('unk')
+        self.status = NodeStatus.Unknown
