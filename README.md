@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/perillaroc/nwpc-workflow-model.svg?branch=master)](https://travis-ci.org/perillaroc/nwpc-workflow-model)
 [![codecov](https://codecov.io/gh/perillaroc/nwpc-workflow-model/branch/master/graph/badge.svg)](https://codecov.io/gh/perillaroc/nwpc-workflow-model)
 
-The workflow model using in some NWPC's projects.
+The workflow model using in NWPC, supports SMS and ecFlow.
 
 ## Introduction
 
@@ -29,6 +29,8 @@ python setup.py install
 ```
 
 ## Tests
+
+Install packages for test using `pip install .[test]`.
 
 Use `pytest` to run tests.
 
