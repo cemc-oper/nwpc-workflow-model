@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/perillaroc/nwpc-workflow-model.svg?branch=master)](https://travis-ci.org/perillaroc/nwpc-workflow-model)
 [![codecov](https://codecov.io/gh/perillaroc/nwpc-workflow-model/branch/master/graph/badge.svg)](https://codecov.io/gh/perillaroc/nwpc-workflow-model)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de25858ec56640bc96aad839e0af83e3)](https://www.codacy.com/app/perillaroc/nwpc-workflow-model?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=perillaroc/nwpc-workflow-model&amp;utm_campaign=Badge_Grade)
 
 The workflow model using in NWPC, supports SMS and ecFlow.
 
