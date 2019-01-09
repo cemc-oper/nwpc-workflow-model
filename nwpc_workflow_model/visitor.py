@@ -34,23 +34,6 @@ class SimplePrintVisitor(NodeVisitor):
         self.level -= 1
 
 
-class ErrorStatusTaskVisitor(NodeVisitor):
-    def __init__(self):
-        NodeVisitor.__init__(self)
-        self.level = 0
-        self.error_task_list = []
-
-    def visit(self, node):
-        if node.status == 'abo' and node.is_leaf():
-            self.error_task_list.append(node)
-
-    def before_visit_child(self):
-        self.level += 1
-
-    def after_visit_child(self):
-        self.level -= 1
-
-
 class SubTreeNodeVisitor(NodeVisitor):
     def __init__(self, max_depth):
         NodeVisitor.__init__(self)
@@ -75,8 +58,15 @@ class ErrorStatusTaskVisitor(NodeVisitor):
         self.level = 0
         self.error_task_list = []
 
+    @classmethod
+    def is_node_aborted(cls, node_status):
+        return node_status in [NodeStatus.aborted, NodeStatus.Aborted]
+
     def visit(self, node):
-        if node.status in [NodeStatus.aborted, NodeStatus.Aborted] and node.is_leaf():
+        node_status = node.status
+        if isinstance(node_status, str):
+            node_status = NodeStatus.get_node_status(node_status)
+        if ErrorStatusTaskVisitor.is_node_aborted(node_status) and node.is_leaf():
             self.error_task_list.append(node)
 
     def before_visit_child(self):

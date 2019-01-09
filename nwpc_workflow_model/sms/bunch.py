@@ -1,6 +1,6 @@
 # coding=utf-8
 from nwpc_workflow_model.bunch import Bunch as BaseBunch
-from .node import Node, NodeStatus
+from .node import NodeStatus
 
 
 class Bunch(BaseBunch):

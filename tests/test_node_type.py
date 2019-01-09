@@ -1,5 +1,4 @@
 # coding: utf-8
-import pytest
 from nwpc_workflow_model.node_type import NodeType
 
 
