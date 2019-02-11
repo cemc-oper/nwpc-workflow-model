@@ -49,7 +49,6 @@ class Node(object):
         ret['children'] = list()
         ret['node_type'] = self.get_node_type().value
 
-        ret['node_path'] = self.get_node_path()
         ret['path'] = self.get_node_path()
 
         ret['status'] = self.status.value

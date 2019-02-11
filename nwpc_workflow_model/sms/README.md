@@ -10,8 +10,8 @@ A node is a task or a container which contains other nodes.
 
 Each node has a status at certain time to indicate what is going on. For example:
 
-  * an `active` task means there is a task running.
-  * an `aborted` task means that some task has an error.
+*  an `active` task means there is a task running.
+*  an `aborted` task means that some task has an error.
 
 ## bunch
 

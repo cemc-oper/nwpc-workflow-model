@@ -11,7 +11,7 @@ with codecs.open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='nwpc-workflow-model',
 
-    version='0.3.0',
+    version='0.4.0',
 
     description='A workflow model using in operation systems at NWPC.',
     long_description=long_description,

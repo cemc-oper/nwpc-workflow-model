@@ -202,7 +202,6 @@ class TestEcflowNode(unittest.TestCase):
             {
                 'name': '',
                 'node_type': NodeType.Root.value,
-                'node_path': '/',
                 'path': '/',
                 'status': 'unknown'
             }
@@ -216,7 +215,6 @@ class TestEcflowNode(unittest.TestCase):
             {
                 'name': 'family1',
                 'node_type': NodeType.Family.value,
-                'node_path': '/suite1/family1',
                 'path': '/suite1/family1',
                 'status': 'unknown'
             }
@@ -226,7 +224,6 @@ class TestEcflowNode(unittest.TestCase):
             'name': 'task1',
             'children': [],
             'node_type': NodeType.Task.value,
-            'node_path': '/suite1/family1/task1',
             'path': '/suite1/family1/task1',
             'status': 'unknown'
         }
@@ -236,7 +233,6 @@ class TestEcflowNode(unittest.TestCase):
             'name': 'alias0',
             'children': [],
             'node_type': NodeType.Alias.value,
-            'node_path': '/suite4/task12/alias0',
             'path': '/suite4/task12/alias0',
             'status': 'unknown'
         }
@@ -256,25 +252,21 @@ class TestEcflowNode(unittest.TestCase):
                                     "name": "task1",
                                     "children": [],
                                     "node_type": NodeType.Task.value,
-                                    "node_path": "/suite1/family1/task1",
                                     "path": "/suite1/family1/task1",
                                     "status": "active"
                                 }
                             ],
                             "node_type": NodeType.Family.value,
-                            "node_path": "/suite1/family1",
                             "path": "/suite1/family1",
                             "status": "active"
                         }
                     ],
                     "node_type": NodeType.Suite.value,
-                    "node_path": "/suite1",
                     "path": "/suite1",
                     "status": "active"
                 }
             ],
             "node_type": NodeType.Root.value,
-            "node_path": "/",
             "path": "/",
             "status": "active"
         }

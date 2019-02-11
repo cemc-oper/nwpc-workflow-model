@@ -112,25 +112,21 @@ class TestVisitor:
                                     "name": "task1",
                                     "children": [],
                                     "node_type": 5,
-                                    "node_path": "/suite1/family1/task1",
                                     "path": "/suite1/family1/task1",
                                     "status": "act"
                                 }
                             ],
                             "node_type": 4,
-                            "node_path": "/suite1/family1",
                             "path": "/suite1/family1",
                             "status": "act"
                         }
                     ],
                     "node_type": 3,
-                    "node_path": "/suite1",
                     "path": "/suite1",
                     "status": "act"
                 }
             ],
             "node_type": 2,
-            "node_path": "/",
             "path": "/",
             "status": "act"
         }

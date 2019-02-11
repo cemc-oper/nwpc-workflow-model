@@ -12,7 +12,7 @@ class WorkflowNode(object):
         """
         inherited_variable_list, an array of objects as follows:
             {
-                'path': node_path,
+                'path': node path,
                 'variable_list': Variable list,
                 'generated_variable_list': generated Variable list
             }
