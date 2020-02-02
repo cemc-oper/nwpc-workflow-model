@@ -5,11 +5,8 @@ from .node import NodeStatus
 
 class Bunch(BaseBunch):
     """
-    Node tree
+    Node tree for ecFlow
     """
     def __init__(self):
         BaseBunch.__init__(self)
-        self.parent = None
-        self.children = list()
-        self.name = ''
         self.status = NodeStatus.unknown

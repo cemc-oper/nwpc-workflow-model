@@ -3,7 +3,7 @@ from enum import Enum
 
 
 class NodeStatus(Enum):
-    # for
+    # for ecFlow
     unknown = 'unknown'
     suspended = 'suspended'
     complete = 'complete'
@@ -28,13 +28,13 @@ class NodeStatus(Enum):
     Halted = 'hal'
 
     @classmethod
-    def get_node_status(cls, status_string):
-        if status_string in cls.__members__:
-            return NodeStatus[status_string]
+    def get_node_status(cls, status: str):
+        if status in cls.__members__:
+            return NodeStatus[status]
         else:
             node_status = None
             try:
-                node_status = NodeStatus(status_string)
+                node_status = NodeStatus(status)
             except ValueError:
                 pass
             return node_status

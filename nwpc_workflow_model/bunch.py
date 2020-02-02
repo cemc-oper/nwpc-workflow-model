@@ -2,8 +2,7 @@ from .node import Node, NodeStatus
 
 
 class Bunch(Node):
-    """
-    表示节点树
+    """Tree of Nodes
     """
     def __init__(self):
         Node.__init__(self)
@@ -14,12 +13,18 @@ class Bunch(Node):
 
     @classmethod
     def create_from_dict(cls, node_dict, parent=None):
-        """
-        Build bunch from a dict. Only the root node is a Bunch, while the others are Node.
+        """Build bunch from a dict.
 
-        :param node_dict:
-        :param parent:
-        :return: bunch
+        Only the root node is a Bunch, while the others are Node.
+
+        Parameters
+        ----------
+        node_dict
+        parent
+
+        Returns
+        -------
+        Bunch
         """
         # use parent is evil.
         bunch = Bunch()
@@ -32,11 +37,16 @@ class Bunch(Node):
         return bunch
 
     def add_node(self, node_path):
-        """
-        Add node which node path is node_path, return added node or None
+        """Add node which node path is node_path, return added node or None
 
-        :param node_path: node path of the node to be added
-        :return:
+        Parameters
+        ----------
+        node_path: str
+            node path of the node to be added
+
+        Returns
+        -------
+        Node or None
         """
         if node_path == '/':
             return self
@@ -60,17 +70,43 @@ class Bunch(Node):
             cur_node = t_node
         return cur_node
 
-    def add_node_status(self, node_status_object):
-        node_path = node_status_object['path']
-        node_status = node_status_object['status']
-        node_name = node_status_object['name']
+    def add_node_status(self, node_dict: dict):
+        """Add node to Bunch.
+
+        Parameters
+        ----------
+        node_dict: dict
+            A node dict which must has the following keys:
+                path
+                status
+                name
+
+        Returns
+        -------
+        Node
+        """
+        node_path = node_dict["path"]
+        node_status = node_dict["status"]
+        node_name = node_dict["name"]
 
         node = self.add_node(node_path)
         node.status = node_status
         node.name = node_name
         return node
 
-    def find_node(self, node_path):
+    def find_node(self, node_path: str):
+        """Find node which path is `node_path` in current bunch.
+
+        All path are required to start with `/`, and `/` is the bunch root.
+
+        Parameters
+        ----------
+        node_path: str
+
+        Returns
+        -------
+        Node or None
+        """
         if node_path == '/':
             return self
         if node_path[0] != '/':

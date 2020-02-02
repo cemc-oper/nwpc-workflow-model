@@ -19,5 +19,5 @@ class Node(BaseNode):
             hal: halted
     """
 
-    def __init__(self, name='', status=NodeStatus.Unknown.value):
+    def __init__(self, name="", status=NodeStatus.Unknown.value):
         BaseNode.__init__(self, name, status)
