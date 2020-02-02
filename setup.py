@@ -17,7 +17,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
 
-    url='https://github.com/perillaroc/nwpc-workflow-model',
+    url='https://github.com/nwpc-oper/nwpc-workflow-model',
 
     author='perillaroc',
     author_email='perillaroc@gmail.com',
