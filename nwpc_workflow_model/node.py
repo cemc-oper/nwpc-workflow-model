@@ -15,11 +15,15 @@ class Node(object):
 
     def to_dict(self):
         """
-        :return: a dict represented Node.
+        Returns
+        -------
+        dict
+            a dict represented Node.
             {
                 'name': str, node name,
                 'node_type': str, node type,
-                'node_path': str, node path,
+                'path': str, node path,
+                'status': str, node status,
                 'children': array, [
                     node dict,
                     node dict,
@@ -28,7 +32,7 @@ class Node(object):
 
             }
 
-        node dict schema:
+            node dict schema:
             {
                 "name": "node",
                 "type": "record",
