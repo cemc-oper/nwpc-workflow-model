@@ -6,10 +6,6 @@ class Bunch(Node):
     """
     def __init__(self):
         Node.__init__(self)
-        self.parent = None
-        self.children = list()
-        self.name = ''
-        self.status = NodeStatus.get_node_status('unk')
 
     @classmethod
     def create_from_dict(cls, node_dict, parent=None):
@@ -36,24 +32,32 @@ class Bunch(Node):
             bunch.children.append(a_child_node)
         return bunch
 
-    def add_node(self, node_path):
+    def add_node(
+            self,
+            path: str,
+            name: str = None,
+            status: str or NodeStatus = None,
+    ):
         """Add node which node path is node_path, return added node or None
 
         Parameters
         ----------
-        node_path: str
+        path: str
             node path of the node to be added
-
+        name: str, optional
+            node name
+        status: str or NodeStatus, optional
+            node status
         Returns
         -------
         Node or None
         """
-        if node_path == '/':
+        if path == '/':
             return self
         node = None
-        if node_path[0] != '/':
+        if path[0] != '/':
             return node
-        node_path = node_path[1:]
+        node_path = path[1:]
         tokens = node_path.split("/")
         cur_node = self
         for a_token in tokens:
@@ -68,6 +72,12 @@ class Bunch(Node):
                 t_node.name = a_token
                 cur_node.add_child(t_node)
             cur_node = t_node
+
+        if status is not None:
+            cur_node.status = status
+        if name is not None:
+            cur_node.name = name
+
         return cur_node
 
     def add_node_status(self, node_dict: dict):
@@ -89,9 +99,11 @@ class Bunch(Node):
         node_status = node_dict["status"]
         node_name = node_dict["name"]
 
-        node = self.add_node(node_path)
-        node.status = node_status
-        node.name = node_name
+        node = self.add_node(
+            path=node_path,
+            name=node_name,
+            status=node_status
+        )
         return node
 
     def find_node(self, node_path: str):
