@@ -28,7 +28,7 @@ class NodeStatus(Enum):
     Halted = 'hal'
 
     @classmethod
-    def get_node_status(cls, status: str):
+    def get_node_status(cls, status):
         if status in cls.__members__:
             return NodeStatus[status]
         else:
