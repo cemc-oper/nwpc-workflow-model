@@ -4,7 +4,33 @@ from nwpc_workflow_model.node_status import NodeStatus
 
 
 class Node(object):
-    def __init__(self, name='', status=NodeStatus.Unknown.value):
+    """Node class.
+
+    Attributes
+    ----------
+    name: str
+        node name
+    status: NodeStatus
+        node status.
+    parent: Node
+        parent node
+    children: list(Node)
+        list of children nodes
+    """
+    def __init__(
+            self,
+            name="",
+            status=NodeStatus.Unknown.value
+    ):
+        """
+
+        Parameters
+        ----------
+        name: str
+            node name
+        status: str
+            node status value.
+        """
         self.parent = None
         self.children = list()
         self.name = name
@@ -13,8 +39,23 @@ class Node(object):
     def __str__(self):
         return self.get_node_path()
 
-    def to_dict(self):
-        """
+    def to_dict(
+            self,
+            include_path=True,
+            include_status=True,
+            include_empty_children=True,
+    ) -> dict:
+        """Convert to dict.
+
+        Parameters
+        ----------
+        include_path: bool
+            result contain `path` key if True.
+        include_status: bool
+            result contains `status` key if True.
+        include_empty_children: bool
+            result contains empty `children` key if True.
+
         Returns
         -------
         dict
@@ -50,26 +91,51 @@ class Node(object):
         """
         ret = dict()
         ret['name'] = self.name
-        ret['children'] = list()
         ret['node_type'] = self.get_node_type().value
 
-        ret['path'] = self.get_node_path()
+        if include_path:
+            ret['path'] = self.get_node_path()
+        if include_status:
+            ret['status'] = self.status.value
 
-        ret['status'] = self.status.value
+        if len(self.children) and not include_empty_children:
+            return ret
 
+        ret['children'] = list()
         for a_child in self.children:
             ret['children'].append(a_child.to_dict())
         return ret
 
     @classmethod
-    def create_from_dict(cls, node_dict, parent=None):
-        # use parent is evil.
+    def create_from_dict(
+            cls,
+            node_dict: dict,
+            parent=None
+    ):
+        """Create `Node` from `dict` object.
+
+        Notes
+        -----
+        use parent is evil.
+
+        Parameters
+        ----------
+        node_dict: dict
+            dict of node. See `to_dict` for dict schema.
+        parent: Node
+            parent node.
+
+        Returns
+        -------
+        Node
+        """
         node = Node()
         node.parent = parent
         node.name = node_dict['name']
-        node.status = NodeStatus.get_node_status(node_dict['status'])
+        node.status = NodeStatus.get_node_status(node_dict.get("status", NodeStatus.Unknown))
+
         node.children = []
-        for a_child_item in node_dict['children']:
+        for a_child_item in node_dict.get("children", []):
             a_child_node = Node.create_from_dict(a_child_item, parent=node)
             node.children.append(a_child_node)
         return node
@@ -78,7 +144,7 @@ class Node(object):
         self.children.append(node)
         node.parent = self
 
-    def get_node_path(self):
+    def get_node_path(self) -> str:
         cur_node = self
         node_list = []
         while cur_node is not None:
@@ -89,7 +155,7 @@ class Node(object):
             node_path = "/"
         return node_path
 
-    def get_node_type(self):
+    def get_node_type(self) -> NodeType:
         if self.parent is None:
             return NodeType.Root
 
@@ -110,10 +176,10 @@ class Node(object):
                 else:
                     return NodeType.Task
 
-    def get_node_type_string(self):
+    def get_node_type_string(self) -> str:
         return NodeType.get_node_type_string(self.get_node_type())
 
-    def is_leaf(self):
+    def is_leaf(self) -> bool:
         if len(self.children) == 0:
             return True
         else:
@@ -128,14 +194,14 @@ class Node(object):
             else:
                 return False
 
-    def is_suite(self):
+    def is_suite(self) -> bool:
         if self.parent:
             parent = self.parent
             if parent.parent is None:
                 return True
         return False
 
-    def is_alias(self):
+    def is_alias(self) -> bool:
         if len(self.children) != 0:
             return False
 
