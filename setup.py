@@ -13,11 +13,11 @@ setup(
 
     version='0.5.0',
 
-    description='A workflow model using in operation systems at NWPC.',
+    description='A workflow model using in operation systems at CEMC/CMA.',
     long_description=long_description,
     long_description_content_type='text/markdown',
 
-    url='https://github.com/nwpc-oper/nwpc-workflow-model',
+    url='https://github.com/cemc-oper/nwpc-workflow-model',
 
     author='perillaroc',
     author_email='perillaroc@gmail.com',
@@ -28,11 +28,12 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7'
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
     ],
 
-    keywords='nwpc workflow model',
+    keywords='cemc workflow model',
 
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
 
