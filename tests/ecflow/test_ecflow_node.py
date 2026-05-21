@@ -1,5 +1,4 @@
-from nwpc_workflow_model.ecflow.ecflow_node import EcflowNode
-from nwpc_workflow_model.ecflow import NodeStatus, NodeType
+from nwpc_workflow_model.ecflow import NodeStatus, NodeType, EcflowNode
 from nwpc_workflow_model.node_variable import NodeVariableType, NodeVariable
 
 

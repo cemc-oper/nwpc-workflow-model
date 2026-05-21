@@ -1,4 +1,5 @@
-# coding=utf-8
+from typing import Dict, Optional
+
 from nwpc_workflow_model.node_type import NodeType
 from nwpc_workflow_model.node_status import NodeStatus
 
@@ -19,8 +20,8 @@ class Node(object):
     """
     def __init__(
             self,
-            name="",
-            status=NodeStatus.Unknown.value
+            name: str = "",
+            status: str = NodeStatus.Unknown.value
     ):
         """
 
@@ -41,10 +42,10 @@ class Node(object):
 
     def to_dict(
             self,
-            include_path=True,
-            include_status=True,
-            include_empty_children=True,
-    ) -> dict:
+            include_path: bool = True,
+            include_status: bool = True,
+            include_empty_children: bool = True,
+    ) -> Dict:
         """Convert to dict.
 
         Parameters
@@ -109,9 +110,9 @@ class Node(object):
     @classmethod
     def create_from_dict(
             cls,
-            node_dict: dict,
-            parent=None
-    ):
+            node_dict: Dict,
+            parent: Optional["Node"] = None
+    ) -> "Node":
         """Create `Node` from `dict` object.
 
         Notes
@@ -140,7 +141,7 @@ class Node(object):
             node.children.append(a_child_node)
         return node
 
-    def add_child(self, node):
+    def add_child(self, node: "Node"):
         self.children.append(node)
         node.parent = self
 
